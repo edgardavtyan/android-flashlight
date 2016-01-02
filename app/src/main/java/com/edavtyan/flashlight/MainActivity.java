@@ -1,15 +1,14 @@
 package com.edavtyan.flashlight;
 
 import android.graphics.Color;
-import android.hardware.camera2.CameraAccessException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int COLOR_OFF = Color.parseColor("#E65100");
-    public static final int COLOR_ON = Color.parseColor("#33691E");
+    private static final int COLOR_OFF = Color.parseColor("#E65100");
+    private static final int COLOR_ON = Color.parseColor("#33691E");
 
     private ImageView toggleView;
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         syncFlashView();
     }
 
-    public void toggle(View view) throws CameraAccessException {
+    public void toggle(View view) {
         if (CustomCamera.isFlashlightEnabled()) {
             CustomCamera.setFlashlightEnabled(false);
         } else {

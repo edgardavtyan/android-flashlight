@@ -7,7 +7,7 @@ import android.hardware.Camera;
 public final class CustomCamera {
     private CustomCamera() {};
 
-    private static Camera camera;
+    private static final Camera camera;
 
     static {
         camera = Camera.open();

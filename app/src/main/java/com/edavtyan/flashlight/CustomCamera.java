@@ -4,17 +4,15 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 
-public final class CustomCamera {
-    private CustomCamera() {};
+public class CustomCamera {
+    private static Camera camera = null;
 
-    private static final Camera camera;
 
-    static {
-        camera = Camera.open();
+    public CustomCamera() {
+        if (camera == null) camera = Camera.open();
     }
 
-
-    public static void setFlashlightEnabled(boolean enabled) {
+    public void setFlashlightEnabled(boolean enabled) {
         Camera.Parameters params = camera.getParameters();
 
         if (enabled) {
@@ -28,11 +26,11 @@ public final class CustomCamera {
         }
     }
 
-    public static boolean hasSupport(Context context) {
+    public boolean hasSupport(Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
 
-    public static boolean isFlashlightEnabled() {
+    public boolean isFlashlightEnabled() {
         return camera.getParameters().getFlashMode().equals(Camera.Parameters.FLASH_MODE_TORCH);
     }
 }

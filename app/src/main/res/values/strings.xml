@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Flashlight</string>
+
+    <string name="NotSupportedDialog_Title">Error</string>
+    <string name="NotSupportedDialog_Message">Your device is not supported</string>
+    <string name="NotSupportedDialog_PositiveButton">OK</string>
 </resources>

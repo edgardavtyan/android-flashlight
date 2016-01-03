@@ -7,8 +7,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if (!CustomCamera.isFlashlightEnabled()) {
-            CustomCamera.setFlashlightEnabled(true);
+        CustomCamera camera = new CustomCamera();
+        if (camera.hasSupport(this) && !camera.isFlashlightEnabled()) {
+            camera.setFlashlightEnabled(true);
         }
     }
 }

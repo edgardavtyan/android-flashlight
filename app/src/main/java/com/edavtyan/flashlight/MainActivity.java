@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG_DIALOG_NOT_SUPPORTED = "dialog_notSupported";
+
     private static final int COLOR_OFF = Color.parseColor("#E65100");
     private static final int COLOR_ON = Color.parseColor("#33691E");
 
     private ImageView toggleView;
+    private CustomCamera camera;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,21 +22,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        camera = new CustomCamera();
         toggleView = (ImageView) findViewById(R.id.toggleView);
-        syncFlashView();
+        if (camera.hasSupport(this)) {
+            syncFlashView();
+        } else {
+            new NotSupportedDialogFragment().show(getFragmentManager(), TAG_DIALOG_NOT_SUPPORTED);
+        }
     }
 
     public void toggle(View view) {
-        if (CustomCamera.isFlashlightEnabled()) {
-            CustomCamera.setFlashlightEnabled(false);
+        if (camera.isFlashlightEnabled()) {
+            camera.setFlashlightEnabled(false);
         } else {
-            CustomCamera.setFlashlightEnabled(true);
+            camera.setFlashlightEnabled(true);
         }
 
         syncFlashView();
     }
 
+
     private void syncFlashView() {
-        toggleView.setColorFilter(CustomCamera.isFlashlightEnabled() ? COLOR_ON : COLOR_OFF);
+        toggleView.setColorFilter(camera.isFlashlightEnabled() ? COLOR_ON : COLOR_OFF);
     }
 }
